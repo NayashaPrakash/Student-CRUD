@@ -3,6 +3,7 @@ from routes.student_routes import student_bp
 from routes.health_routes import health_bp
 from utils.error_handlers import register_error_handlers
 from datetime import datetime
+import os
 
 def create_app():
     app = Flask(__name__)
@@ -31,4 +32,9 @@ if __name__ == '__main__':
     print("GET    /students/{id}/summary - Generate AI summary for student")
     print("GET    /health             - Health check")
 
-    app.run(debug=True, host='0.0.0.0', port=5000, threaded=True)
+    app.run(
+            debug=False,
+            host="0.0.0.0",
+            port=int(os.environ.get("PORT", 5000)),
+            threaded=True
+        )
